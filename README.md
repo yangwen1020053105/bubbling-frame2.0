@@ -1,37 +1,59 @@
 # bubbling-frame2.0
 
-#### 介绍
-bubbling-frame2.0，开箱即用的后台管理系统，前端使用antdvue，后端使用springboot+mybaties。
+##  介绍  ##
 
-#### 软件架构
-软件架构说明
+bubbling@frame2.0,开箱即用的后台管理系统。
 
+##  软件架构  ##
 
-#### 安装教程
+语言：java
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+前端：antdvue
 
-#### 使用说明
+后端：SpringBoot+MybatiesPlus
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##  效果图
 
-#### 参与贡献
+1. 登录
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+![](https://gitee.com/yanwen1020053105/md-image/raw/master/bubbling-frame2.0/%E7%99%BB%E5%BD%95.png)
 
+2. 用户管理
 
-#### 特技
+![](https://gitee.com/yanwen1020053105/md-image/raw/master/bubbling-frame2.0/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.png)
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+3. 部门管理
+
+![](https://gitee.com/yanwen1020053105/md-image/raw/master/bubbling-frame2.0/%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86.png)
+
+4. 角色管理
+
+![](https://gitee.com/yanwen1020053105/md-image/raw/master/bubbling-frame2.0/%E8%A7%92%E8%89%B2%E7%AE%A1%E7%90%86.png)
+
+5. 菜单管理
+
+![](https://gitee.com/yanwen1020053105/md-image/raw/master/bubbling-frame2.0/%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86.png)
+
+##  安装教程
+
+###  后端运行（bubbling-service）
+
+1.  使用git将项目克隆到本地
+2.  创建数据库并执行数据库脚本bubbling-frame2.0\db\bubbling_frame2.0.sql
+3.  修改bubbling-frame1.0\bubbling-service\src\main\resources\application.properties为spring.profiles.active=prod
+4.  修改bubbling-frame1.0\bubbling-service\src\main\resources\application-prod.properties的数据库连接及用户名密码
+5.  运行bubbling-frame1.0\bubbling-service\src\main\java\com\bubbling\BubblingMain.java
+
+###  前端运行（bubbling-front）
+
+1. 安装webstorm或HBuilder
+2. 安装node.js、cnpm、yarn
+3. 打开cmd命令窗口，进入bubbling-front目录
+4. 执行yarn install安装依赖
+5. 导入项目到ide
+6. 在ide中运行或者执行yarn run serve命令
+
+##  使用说明
+
+1.  访问http://127.0.0.1:8083/login.html 用户名admin密码111111
+2.  使用了antdvueAdmin登录界面的矢量背景图，https://gitee.com/iczer/vue-antd-admin#https://iczer.gitee.io/vue-antd-admin
