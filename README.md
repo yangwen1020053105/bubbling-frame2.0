@@ -40,9 +40,9 @@ bubbling@frame2.0,开箱即用的后台管理系统。
 
 1.  使用git将项目克隆到本地
 2.  创建数据库并执行数据库脚本bubbling-frame2.0\db\bubbling_frame2.0.sql
-3.  修改bubbling-frame1.0\bubbling-service\src\main\resources\application.properties为spring.profiles.active=prod
-4.  修改bubbling-frame1.0\bubbling-service\src\main\resources\application-prod.properties的数据库连接及用户名密码
-5.  运行bubbling-frame1.0\bubbling-service\src\main\java\com\bubbling\BubblingMain.java
+3.  修改bubbling-frame2.0\bubbling-service\src\main\resources\application.properties为spring.profiles.active=prod
+4.  修改bubbling-frame2.0\bubbling-service\src\main\resources\application-prod.properties的数据库连接及用户名密码
+5.  运行bubbling-frame2.0\bubbling-service\src\main\java\com\bubbling\BubblingMain.java
 
 ###  前端运行（bubbling-front）
 
