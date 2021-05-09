@@ -15,7 +15,7 @@
             </a-input>
             <br />
             <br />
-            <a-input size="large" autocomplete="autocomplete" type="password" placeholder="密码" v-model:value="password">
+            <a-input size="large" autocomplete="autocomplete" @onkeydown="loginKeyDown" type="password" placeholder="密码" v-model:value="password">
               <template #prefix>
                 <KeyOutlined />
               </template>
@@ -43,6 +43,11 @@ export default {
     KeyOutlined,
   },
   methods:{
+    loginKeyDown(e){
+      if(e.keyCode==13){
+        this.login();
+      }
+    },
     login(){
       //计算响应时间
       const startDate=new Date();
