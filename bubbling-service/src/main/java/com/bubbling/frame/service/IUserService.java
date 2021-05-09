@@ -12,5 +12,12 @@ public interface IUserService {
 	 * @Date           2019年12月15日 下午7:58:32
 	 */
 	TAcUser quertUser(String userName) throws Exception;
-	
+	/**
+	 *修改用户信息
+	 *@param tAcUser
+	 *@Return:void
+	 *@Author:dc_yangwen
+	 *@Date:2021-05-09 9:10
+	 */
+    void updateUser(TAcUser tAcUser);
 }

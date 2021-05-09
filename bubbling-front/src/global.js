@@ -1,4 +1,4 @@
-const gateway="http://localhost:8083/";
+const gateway="http://yangwen.i234.me:8083/";
 const methods={
     /**
      * 获取当前时间yyyy-MM-dd hh:mm:ss.SSS

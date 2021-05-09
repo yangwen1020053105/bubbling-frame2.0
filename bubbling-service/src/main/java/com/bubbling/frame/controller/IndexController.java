@@ -69,6 +69,32 @@ public class IndexController {
         }
 
     }
+    @GetMapping("/loginOut.do")
+    public ResponseBean loginOut(String token){
+        SessionUtils.setSessionTimeOut(new Date().getTime(),token);
+        return ResponseBean.success();
+    }
+
+    @PostMapping("/updatePassword.do")
+    public ResponseBean updatePassword(@RequestBody Map<String,Object> map){
+        String token= (String) map.get("token");
+        String oldPassword=(String) map.get("oldPassword");
+        String newPassword=(String) map.get("newPassword");
+        TAcUser tAcUser=SessionUtils.getUser(token);
+        //验证登录信息
+        if(SessionUtils.checkToken(token)&&BaseUtils.isNotNull(tAcUser)){
+            //password是否相等
+            if(tAcUser.getPassword().equals(BaseUtils.getMD5String(oldPassword))){
+                tAcUser.setPassword(BaseUtils.getMD5String(newPassword));
+                userService.updateUser(tAcUser);
+            }else{
+                return ResponseBean.error("旧密码不正确，请重新输入！");
+            }
+        }else {
+            return ResponseBean.error("登录信息无效，请重新登录！");
+        }
+        return ResponseBean.success();
+    }
     /**
      *验证token有效性
      *@param token

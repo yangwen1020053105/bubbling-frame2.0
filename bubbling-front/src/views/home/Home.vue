@@ -13,10 +13,18 @@
         <menu-unfold-outlined  v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)"/>
         <menu-fold-outlined  v-else class="trigger" @click="() => (collapsed = !collapsed)" />
         <!--登录人-->
-        <div @click="updatePassword" style="cursor: pointer">
-          <div class="rightTrigger">{{userName==null?'未登录':userName}}</div>
-          <UserOutlined class="rightTrigger" />
-        </div>
+        <a-dropdown>
+          <div class="userBox" >
+            <div class="rightTrigger">{{userName==null?'未登录':userName}}</div>
+            <UserOutlined class="rightTrigger" />
+          </div>
+          <template #overlay>
+            <a-menu >
+              <a-menu-item key="1" @click="updatePassword"><KeyOutlined />修改密码</a-menu-item>
+              <a-menu-item key="2" @click="loginOut"><PoweroffOutlined />退出登录</a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
       </a-layout-header>
       <!--右侧内容-->
       <a-tabs tabBarGutter="0" type="editable-card" style="margin-left: 2px;" size="small"  hideAdd="true" v-model:activeKey="activeKey" @change="changePage"  @edit="removeTba">
@@ -25,19 +33,31 @@
       </a-tabs>
       <a-divider style="height: 0.5px;margin:-16px 0px 0px 0px;background-color: #fff" />
       <a-layout-content :style="{ padding: '10px 0px 0px 10px', background: '#f0f2f5', minHeight: '280px' }">
-<!--        <div id="routerBox" style="width: 100%;height: 100%;">-->
-<!--          <div style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.3);position: absolute;margin-left:-10px;margin-top:-10px;z-index: 9999;">-->
-<!--            <img src="~@/assets/loading.svg">-->
-<!--          </div>-->
-<!--        </div>-->
         <router-view ></router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>
+  <a-modal v-model:visible="updatePassVisible"  width="700px" title="用户信息" @ok="updatePass">
+    <a-form ref="form" :model="passWord" :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }" :rules="{
+              oldPassword: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+              newPassword: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+              sNewPassword: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+              }">
+      <a-form-item name="oldPassword" label="旧密码">
+        <a-input autocomplete="autocomplete" type="password" placeholder="密码" v-model:value="passWord.oldPassword"></a-input>
+      </a-form-item>
+      <a-form-item name="newPassword" label="新密码">
+        <a-input autocomplete="autocomplete" type="password" placeholder="密码" v-model:value="passWord.newPassword"></a-input>
+      </a-form-item>
+      <a-form-item name="sNewPassword" label="确认密码">
+        <a-input autocomplete="autocomplete" type="password" placeholder="密码" v-model:value="passWord.sNewPassword"></a-input>
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 
 <script>
-import {UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,} from '@ant-design/icons-vue';
+import {UserOutlined,KeyOutlined,PoweroffOutlined, MenuUnfoldOutlined, MenuFoldOutlined,} from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 import Cookies from 'js-cookie';
 import FuncTree from "@/views/home/components/FuncTree";
@@ -47,6 +67,8 @@ export default defineComponent({
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     FuncTree,
+    KeyOutlined,
+    PoweroffOutlined,
   },
   setup() {
     return {
@@ -65,8 +87,48 @@ export default defineComponent({
     })
   },
   methods:{
+    /**
+     * 显示修改密码窗口
+     */
     updatePassword(){
-      console.log("修改密码")
+      this.updatePassVisible=true;
+    },
+    /**
+     * 修改密码
+     */
+    updatePass(){
+      //新密码相等
+      if(this.passWord.newPassword==this.passWord.sNewPassword){
+        const param={}
+        param.token=Cookies.get("token");
+        param.oldPassword=this.passWord.oldPassword;
+        param.newPassword=this.passWord.newPassword;
+        this.axios.post("/updatePassword.do",param).then((res)=>{
+          if(res.rtnCode=="200"){
+            this.$message.success("密码修改成功请重新登录！正在跳转...");
+            setTimeout(()=>{
+              window.location.href="/login";
+            },1000);
+          }else{
+            this.$message.error(res.rtnMsg);
+          }
+        })
+      }else{
+        this.$message.error("两次密码不相等");
+      }
+    },
+    /**
+     * 登出
+     */
+    loginOut(){
+      const token = Cookies.get("token");
+      this.axios.get('/loginOut.do',{params:{"token":token}}).then((res)=>{
+        if(res.rtnCode==200){
+          Cookies.remove('token');
+          Cookies.remove('userName');
+          this.$router.push("/login");
+        }
+      })
     },
     showContent(node){
       if(this.getIndeInPanes(node.viewPath)==-1){
@@ -116,12 +178,19 @@ export default defineComponent({
       treeDate:null,
       activeKey:null,
       panes:[],
+      display:false,
+      updatePassVisible:false,
+      passWord:{
+        oldPassword:null,
+        newPassword:null,
+        sNewPassword:null,
+      },
     }
   },
 });
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -148,5 +217,29 @@ export default defineComponent({
 }
 .rightTrigger{
   float: right;height: 100%;line-height: 50px;margin-right: 10px;
+}
+.userBox{
+  cursor: pointer;
+  float: right;
+}
+.userBox:hover{
+  background-color: #f0f0f0;
+}
+.updatePassword{
+  background-color: rgb(255, 255, 255);
+  width: 120px;
+  height: 80px;
+  position: absolute;
+  z-index: 9999;
+  right: 0px;
+  top: 45px;
+  border-radius: 5px;
+  display: none;
+}
+.divBut{
+  width: 100%;height: 30px;margin: 5px 0px;line-height: 30px;text-align: center;
+}
+.divBut:hover{
+  background-color:@primary-color;
 }
 </style>

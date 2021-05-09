@@ -34,6 +34,17 @@ public class UserService extends BaseService implements IUserService {
 		}
 		
 	}
+	/**
+	 *修改用户信息
+	 *@param tAcUser
+	 *@Return:void
+	 *@Author:dc_yangwen
+	 *@Date:2021-05-09 9:10
+	 */
+	@Override
+	public void updateUser(TAcUser tAcUser) {
+		tAcUserMapper.updateById(tAcUser);
+	}
 
 
 }

@@ -12,6 +12,14 @@ bubbling@frame2.0,开箱即用的后台管理系统。
 
 后端：SpringBoot+MybatiesPlus
 
+##  演示地址
+
+http://yangwen.i234.me:8084
+
+账号admin
+
+密码111111
+
 ##  效果图
 
 1. 登录

@@ -66,7 +66,7 @@ export default {
                 if(res.rtnCode=="200"){
                   Cookies.set('token', res.data.token, { expires: 0.125, path: '/' });
                   Cookies.set('userName', res.data.userName, { expires: 0.125, path: '/' });
-                  window.location.href="/home";
+                  this.$router.push("/home");
                 }else{
                   this.$notification['error']({
                     message: '提示',
