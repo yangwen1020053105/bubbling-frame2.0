@@ -17,6 +17,7 @@ public class TAcUser {
   private short sex;
   private String email;
   private String phone;
+  private Integer funcOrder;
   @TableField(fill = FieldFill.INSERT)
   private String createUser;
   @TableField(fill = FieldFill.INSERT)

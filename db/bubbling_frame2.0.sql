@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 06/05/2021 21:22:59
+ Date: 16/05/2021 19:57:01
 */
 
 SET NAMES utf8mb4;
@@ -27,6 +27,7 @@ CREATE TABLE `t_ac_func`  (
   `FUNC_NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `VIEW_PATH` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `IMAGE_PATH` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `FUNC_ORDER` int(0) NULL DEFAULT NULL,
   `CREATE_USER` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
   `UPDATE_USER` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -38,12 +39,12 @@ CREATE TABLE `t_ac_func`  (
 -- ----------------------------
 -- Records of t_ac_func
 -- ----------------------------
-INSERT INTO `t_ac_func` VALUES ('1', '0', '根节点', NULL, NULL, 'syscreate', '2019-12-19 21:42:51', NULL, NULL, 2);
-INSERT INTO `t_ac_func` VALUES ('2', '1', '系统权限', '', '&#xe604;', 'syscreate', '2019-12-19 21:44:05', NULL, NULL, 1);
-INSERT INTO `t_ac_func` VALUES ('4', '2', '用户管理', '/home/user', '&#xe602;', 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
-INSERT INTO `t_ac_func` VALUES ('4028fc8b6f3d4c16016f3d4f98c40000', '2', '部门管理', '/home/org', '&#xe601;', '00001', '2019-12-25 21:51:00', '00001', '2019-12-25 21:51:00', 1);
-INSERT INTO `t_ac_func` VALUES ('5', '2', '角色管理', '/home/role', '&#xe603;', 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
-INSERT INTO `t_ac_func` VALUES ('6', '2', '菜单管理', '/home/func', '&#xe605;', 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
+INSERT INTO `t_ac_func` VALUES ('1', '0', '根节点', NULL, NULL, NULL, 'syscreate', '2019-12-19 21:42:51', NULL, NULL, 2);
+INSERT INTO `t_ac_func` VALUES ('2', '1', '系统权限', '', '&#xe604;', NULL, 'syscreate', '2019-12-19 21:44:05', NULL, NULL, 1);
+INSERT INTO `t_ac_func` VALUES ('4', '2', '用户管理', '/home/user', '&#xe602;', NULL, 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
+INSERT INTO `t_ac_func` VALUES ('4028fc8b6f3d4c16016f3d4f98c40000', '2', '部门管理', '/home/org', '&#xe601;', NULL, '00001', '2019-12-25 21:51:00', '00001', '2019-12-25 21:51:00', 1);
+INSERT INTO `t_ac_func` VALUES ('5', '2', '角色管理', '/home/role', '&#xe603;', NULL, 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
+INSERT INTO `t_ac_func` VALUES ('6', '2', '菜单管理', '/home/func', '&#xe605;', NULL, 'syscreate', '2019-12-19 21:44:47', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for t_ac_org
@@ -167,7 +168,7 @@ CREATE TABLE `t_ac_user`  (
 -- ----------------------------
 -- Records of t_ac_user
 -- ----------------------------
-INSERT INTO `t_ac_user` VALUES ('001', 'admin', '96e79218965eb72c92a549dd5a330112', '管理员', NULL, '1020053105@qq.com', '13880666081', 'syscreate', '2019-12-14 13:34:13', '001', '2020-01-30 21:24:21', 1);
+INSERT INTO `t_ac_user` VALUES ('001', 'admin', '96e79218965eb72c92a549dd5a330112', '管理员', 0, '1020053105@qq.com', '13880666081', 'syscreate', '2019-12-14 13:34:13', '001', '2020-01-30 21:24:21', 1);
 INSERT INTO `t_ac_user` VALUES ('128f0cef30bb5de95bfbd58dc2ca3114', 'wuren', '96e79218965eb72c92a549dd5a330112', '乌仁', 2, 'undefined@gmail.com', '15801158548', '001', '2021-04-22 22:01:31', '001', '2021-04-27 21:31:07', 2);
 INSERT INTO `t_ac_user` VALUES ('9e226502d2f6195dfdec1bd4708b3841', 'yangwen', '96e79218965eb72c92a549dd5a330112', '杨文', 1, '1020053105@qq.com', '19520196860', '001', '2021-04-27 22:18:09', '001', '2021-04-27 22:25:28', 1);
 

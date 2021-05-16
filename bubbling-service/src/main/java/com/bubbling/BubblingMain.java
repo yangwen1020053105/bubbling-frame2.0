@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.bubbling.**.mapper")
+@MapperScan("com.bubbling.**.dao")
 public class BubblingMain {
     public static void main(String[] args) {
         SpringApplication.run(BubblingMain.class,args);
