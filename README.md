@@ -14,6 +14,8 @@ bubbling@frame2.0,开箱即用的后台管理系统。
 
 ##  演示地址
 
+开放时间9:00-23:00
+
 http://yangwen.i234.me:8084
 
 账号admin
